@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/data/jpa
+          http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+    <!-- ===================== DATABASE CONFIG ===================== -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${spring.datasource.driver-class-name}"/>
+        <property name="url" value="${spring.datasource.url}"/>
+        <property name="username" value="${spring.datasource.username}"/>
+        <property name="password" value="${spring.datasource.password}"/>
+    </bean>
+
+    <!-- ===================== JPA CONFIG ===================== -->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="com.deliveryoptimizer.model"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="generateDdl" value="true"/>
+                <property name="showSql" value="true"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+    <!-- ===================== REPOSITORIES ===================== -->
+    <jpa:repositories base-package="com.deliveryoptimizer.repository"
+                      entity-manager-factory-ref="entityManagerFactory"
+                      transaction-manager-ref="transactionManager"/>
+
+    <!-- ===================== SERVICES & OPTIMIZERS ===================== -->
+    <bean id="tourService" class="com.deliveryoptimizer.service.impl.TourService">
+        <property name="tourOptimizer" ref="nearestNeighborOptimizer"/>
+    </bean>
+
+    <bean id="nearestNeighborOptimizer" class="com.deliveryoptimizer.service.impl.NearestNeighborOptimizer"/>
+    <bean id="clarkeWrightOptimizer" class="com.deliveryoptimizer.service.impl.ClarkeWrightOptimizer"/>
+
+
+    <!-- ===================== UTILITIES ===================== -->
+    <bean id="distanceCalculator" class="com.deliveryoptimizer.util.DistanceCalculator"/>
+</beans>
