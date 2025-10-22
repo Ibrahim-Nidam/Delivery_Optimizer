@@ -1,0 +1,142 @@
+paths:
+  /api/deliveries:
+    get:
+      tags: [Deliveries]
+      summary: Get all deliveries
+      description: Returns all deliveries
+      responses:
+        '200':
+          description: List of deliveries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeliveryDTO'
+
+    post:
+      tags: [Deliveries]
+      summary: Create a new delivery
+      description: Adds a delivery to the system
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryDTO'
+            example:
+              altitude: 33.5731
+              longitude: -7.5898
+              maxWeight: 500
+              maxVolume: 10
+              status: "PENDING"
+              timeSlot: "08:00-10:00"
+      responses:
+        '201':
+          description: Delivery created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryDTO'
+
+  /api/deliveries/{id}:
+    get:
+      tags: [Deliveries]
+      summary: Get delivery by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Delivery retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryDTO'
+        '404':
+          description: Delivery not found
+
+    put:
+      tags: [Deliveries]
+      summary: Update a delivery
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryDTO'
+      responses:
+        '200':
+          description: Delivery updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryDTO'
+        '404':
+          description: Delivery not found
+
+    delete:
+      tags: [Deliveries]
+      summary: Delete a delivery
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '204':
+          description: Delivery deleted successfully
+        '404':
+          description: Delivery not found
+
+components:
+  schemas:
+    DeliveryDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        altitude:
+          type: number
+          format: double
+          example: 33.5731
+        longitude:
+          type: number
+          format: double
+          example: -7.5898
+        maxWeight:
+          type: number
+          format: double
+          example: 500.0
+        maxVolume:
+          type: number
+          format: double
+          example: 10.0
+        status:
+          type: string
+          enum: ["PENDING", "IN_TRANSIT", "DELIVERED", "FAILED"]
+          example: "PENDING"
+        timeSlot:
+          type: string
+          example: "08:00-10:00"
+      required:
+        - altitude
+        - longitude
+        - maxWeight
+        - maxVolume
+        - status
+        - timeSlot

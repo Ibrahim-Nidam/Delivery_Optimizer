@@ -44,6 +44,10 @@
         <constructor-arg ref="vehicleRepository" />
     </bean>
 
+    <bean id="deliveryService" class="com.deliveryoptimizer.service.impl.DeliveryService">
+        <constructor-arg ref="deliveryRepository" />
+    </bean>
+
 
     <!-- ===================== UTILITIES ===================== -->
     <bean id="distanceCalculator" class="com.deliveryoptimizer.util.DistanceCalculator"/>
