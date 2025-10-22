@@ -1,0 +1,150 @@
+paths:
+  /api/warehouses:
+    get:
+      tags: [Warehouses]
+      summary: Get all warehouses
+      description: Returns a list of all warehouses
+      responses:
+        '200':
+          description: List of warehouses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WarehouseDTO'
+
+    post:
+      tags: [Warehouses]
+      summary: Create a new warehouse
+      description: Adds a new warehouse to the system
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WarehouseDTO'
+            example:
+              address: "123 Logistics St"
+              altitude: 33.5731
+              longitude: -7.5898
+              openTime: "08:00:00"
+              closeTime: "18:00:00"
+      responses:
+        '201':
+          description: Warehouse created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WarehouseDTO'
+
+  /api/warehouses/{id}:
+    get:
+      tags: [Warehouses]
+      summary: Get warehouse by ID
+      description: Returns a specific warehouse by its unique ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the warehouse to retrieve
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Warehouse retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WarehouseDTO'
+        '404':
+          description: Warehouse not found
+
+    put:
+      tags: [Warehouses]
+      summary: Update a warehouse
+      description: Updates warehouse details by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the warehouse to update
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WarehouseDTO'
+            example:
+              address: "456 Updated Road"
+              altitude: 34.0001
+              longitude: -6.9001
+              openTime: "07:00:00"
+              closeTime: "17:00:00"
+      responses:
+        '200':
+          description: Warehouse updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WarehouseDTO'
+        '404':
+          description: Warehouse not found
+
+    delete:
+      tags: [Warehouses]
+      summary: Delete a warehouse
+      description: Deletes a warehouse by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the warehouse to delete
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '204':
+          description: Warehouse deleted successfully
+        '404':
+          description: Warehouse not found
+
+components:
+  schemas:
+    WarehouseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        address:
+          type: string
+          minLength: 6
+          maxLength: 20
+          example: "123 Logistics St"
+        altitude:
+          type: number
+          format: double
+          example: 33.5731
+        longitude:
+          type: number
+          format: double
+          example: -7.5898
+        openTime:
+          type: string
+          format: time
+          example: "08:00:00"
+        closeTime:
+          type: string
+          format: time
+          example: "18:00:00"
+      required:
+        - address
+        - altitude
+        - longitude
+        - openTime
+        - closeTime

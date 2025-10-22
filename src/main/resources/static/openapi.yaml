@@ -13,24 +13,30 @@ tags:
     description: Manage delivery vehicles
   - name: Deliveries
     description: Manage delivery operations
+  - name: Warehouses
+    description: Manage warehouse locations and schedules
 
 paths:
-  # 🔹 Include all vehicle endpoints
   /api/vehicles:
     $ref: './vehicles.yaml#/paths/~1api~1vehicles'
   /api/vehicles/{id}:
     $ref: './vehicles.yaml#/paths/~1api~1vehicles~1{id}'
 
-  # 🔹 Include all delivery endpoints
   /api/deliveries:
     $ref: './deliveries.yaml#/paths/~1api~1deliveries'
   /api/deliveries/{id}:
     $ref: './deliveries.yaml#/paths/~1api~1deliveries~1{id}'
 
+  /api/warehouses:
+    $ref: './warehouses.yaml#/paths/~1api~1warehouses'
+  /api/warehouses/{id}:
+    $ref: './warehouses.yaml#/paths/~1api~1warehouses~1{id}'
+
 components:
   schemas:
-    # 🔹 Merge schemas from referenced files
     VehicleDTO:
       $ref: './vehicles.yaml#/components/schemas/VehicleDTO'
     DeliveryDTO:
       $ref: './deliveries.yaml#/components/schemas/DeliveryDTO'
+    WarehouseDTO:
+      $ref: './warehouses.yaml#/components/schemas/WarehouseDTO'

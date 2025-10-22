@@ -48,6 +48,10 @@
         <constructor-arg ref="deliveryRepository" />
     </bean>
 
+    <bean id="warehouseService" class="com.deliveryoptimizer.service.impl.WarehouseService">
+        <constructor-arg ref="warehouseRepository" />
+    </bean>
+
 
     <!-- ===================== UTILITIES ===================== -->
     <bean id="distanceCalculator" class="com.deliveryoptimizer.util.DistanceCalculator"/>
