@@ -40,12 +40,9 @@
                       transaction-manager-ref="transactionManager"/>
 
     <!-- ===================== SERVICES & OPTIMIZERS ===================== -->
-    <bean id="tourService" class="com.deliveryoptimizer.service.impl.TourService">
-        <property name="tourOptimizer" ref="nearestNeighborOptimizer"/>
+    <bean id="vehicleService" class="com.deliveryoptimizer.service.impl.VehicleService">
+        <constructor-arg ref="vehicleRepository" />
     </bean>
-
-    <bean id="nearestNeighborOptimizer" class="com.deliveryoptimizer.service.impl.NearestNeighborOptimizer"/>
-    <bean id="clarkeWrightOptimizer" class="com.deliveryoptimizer.service.impl.ClarkeWrightOptimizer"/>
 
 
     <!-- ===================== UTILITIES ===================== -->
