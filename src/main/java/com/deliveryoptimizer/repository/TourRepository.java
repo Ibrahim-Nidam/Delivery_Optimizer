@@ -1,4 +1,4 @@
 package com.deliveryoptimizer.repository;
 
-public class TourRepository {
+public interface TourRepository {
 }
