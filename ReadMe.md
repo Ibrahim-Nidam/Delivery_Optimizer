@@ -121,7 +121,7 @@ delivery-optimizer/
 │   │       │   ├── openapi.yaml
 │   │       │   ├── vehicles.yaml
 │   │       │   ├── tours.yaml
-│   │       │   ├── wharehouses.yaml
+│   │       │   ├── warehouses.yaml
 │   │       │   └── deliveries.yaml
 │   │       │   
 │   │       ├── templates/
