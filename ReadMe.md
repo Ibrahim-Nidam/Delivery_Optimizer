@@ -118,6 +118,12 @@ delivery-optimizer/
 │   │   │
 │   │   └── resources/
 │   │       ├── static/
+│   │       │   ├── openapi.yaml
+│   │       │   ├── vehicles.yaml
+│   │       │   ├── tours.yaml
+│   │       │   ├── wharehouses.yaml
+│   │       │   └── deliveries.yaml
+│   │       │   
 │   │       ├── templates/
 │   │       ├── application.properties   # ⚙️ Database and server configuration
 │   │       ├── applicationContext.xml   # 🧩 Bean configuration and DI
