@@ -1,4 +1,7 @@
 package com.deliveryoptimizer.repository;
 
-public interface WarehouseRepository {
+import com.deliveryoptimizer.model.Warehouse;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface WarehouseRepository extends JpaRepository<Warehouse, Long> {
 }
