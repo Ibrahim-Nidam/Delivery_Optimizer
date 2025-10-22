@@ -1,4 +1,7 @@
 package com.deliveryoptimizer.repository;
 
-public interface DeliveryRepository {
+import com.deliveryoptimizer.model.Delivery;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface DeliveryRepository extends JpaRepository<Delivery, Long> {
 }
