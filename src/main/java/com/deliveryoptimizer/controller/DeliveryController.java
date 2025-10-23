@@ -2,6 +2,8 @@ package com.deliveryoptimizer.controller;
 
 import com.deliveryoptimizer.dto.DeliveryDTO;
 import com.deliveryoptimizer.service.impl.DeliveryService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +18,8 @@ public class DeliveryController {
     }
 
     @PostMapping
-    public DeliveryDTO createDelivery(@RequestBody DeliveryDTO dto){
+    @ResponseStatus(HttpStatus.CREATED)
+    public DeliveryDTO createDelivery(@Valid @RequestBody DeliveryDTO dto){
         return deliveryService.createDelivery(dto);
     }
 
@@ -31,11 +34,12 @@ public class DeliveryController {
     }
 
     @PutMapping("/{id}")
-    public DeliveryDTO updateDelivery(@PathVariable Long id, @RequestBody DeliveryDTO dto){
+    public DeliveryDTO updateDelivery(@PathVariable Long id, @Valid @RequestBody DeliveryDTO dto){
         return deliveryService.updateDelivery(id, dto);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteDelivery(@PathVariable Long id){
         deliveryService.deleteDelivery(id);
     }

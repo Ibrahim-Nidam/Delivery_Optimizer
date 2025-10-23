@@ -3,6 +3,8 @@ package com.deliveryoptimizer.controller;
 import com.deliveryoptimizer.dto.VehicleDTO;
 import com.deliveryoptimizer.service.impl.VehicleService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +19,8 @@ public class VehicleController {
     }
 
     @PostMapping
-    public VehicleDTO createVehicle(@RequestBody VehicleDTO dto){
+    @ResponseStatus(HttpStatus.CREATED)
+    public VehicleDTO createVehicle(@Valid @RequestBody VehicleDTO dto){
         return vehicleService.createVehicle(dto);
     }
 
@@ -32,11 +35,12 @@ public class VehicleController {
     }
 
     @PutMapping("/{id}")
-    public VehicleDTO updateVehicle(@PathVariable Long id, @RequestBody VehicleDTO dto){
+    public VehicleDTO updateVehicle(@PathVariable Long id, @Valid @RequestBody VehicleDTO dto){
         return vehicleService.updateVehicle(id, dto);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteVehicle(@PathVariable Long id){
         vehicleService.deleteVehicle(id);
     }
