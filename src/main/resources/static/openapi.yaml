@@ -15,6 +15,8 @@ tags:
     description: Manage delivery operations
   - name: Warehouses
     description: Manage warehouse locations and schedules
+  - name: Tours
+    description: Manage tours and associated deliveries
 
 paths:
   /api/vehicles:
@@ -32,6 +34,11 @@ paths:
   /api/warehouses/{id}:
     $ref: './warehouses.yaml#/paths/~1api~1warehouses~1{id}'
 
+  /api/tours:
+    $ref: './tours.yaml#/paths/~1api~1tours'
+  /api/tours/{id}:
+    $ref: './tours.yaml#/paths/~1api~1tours~1{id}'
+
 components:
   schemas:
     VehicleDTO:
@@ -40,3 +47,5 @@ components:
       $ref: './deliveries.yaml#/components/schemas/DeliveryDTO'
     WarehouseDTO:
       $ref: './warehouses.yaml#/components/schemas/WarehouseDTO'
+    TourDTO:
+      $ref: './tours.yaml#/components/schemas/TourDTO'

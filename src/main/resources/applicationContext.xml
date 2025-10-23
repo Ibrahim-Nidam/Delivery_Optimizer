@@ -52,6 +52,10 @@
         <constructor-arg ref="warehouseRepository" />
     </bean>
 
+    <bean id="tourService" class="com.deliveryoptimizer.service.impl.TourService">
+        <constructor-arg ref="tourRepository" />
+    </bean>
+
 
     <!-- ===================== UTILITIES ===================== -->
     <bean id="distanceCalculator" class="com.deliveryoptimizer.util.DistanceCalculator"/>
