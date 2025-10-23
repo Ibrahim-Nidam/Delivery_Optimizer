@@ -77,9 +77,9 @@ paths:
             schema:
               $ref: '#/components/schemas/TourDTO'
             example:
-              vehicleId: 2
-              deliveryIds: [4, 5, 6]
-              warehouseId: 2
+              vehicleId: 1
+              deliveryIds: [1, 2, 3]
+              warehouseId: 1
               date: "2025-10-25"
               totalDistance: 130.0
               status: "IN_PROGRESS"
@@ -108,6 +108,42 @@ paths:
           description: Tour deleted successfully
         '404':
           description: Tour not found
+
+  /api/tours/{id}/deliveries:
+    post:
+      tags: [Tours]
+      summary: Add deliveries to a tour
+      description: >
+        Adds a list of deliveries to an existing tour.
+        Validates vehicle capacity and ensures deliveries are not already assigned.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the tour
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: integer
+              example: [4, 5, 6]
+      responses:
+        '200':
+          description: Deliveries successfully added to the tour
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TourDTO'
+        '400':
+          description: Invalid delivery list or vehicle capacity exceeded
+        '404':
+          description: Tour or deliveries not found
 
 components:
   schemas:
@@ -142,7 +178,6 @@ components:
           example: "PLANNED"
       required:
         - vehicleId
-        - deliveryIds
         - warehouseId
         - date
         - totalDistance
