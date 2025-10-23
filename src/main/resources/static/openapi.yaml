@@ -1,0 +1,51 @@
+openapi: 3.0.3
+info:
+  title: Delivery Optimizer API
+  version: 1.0.0
+  description: Comprehensive API documentation for the Delivery Optimizer system
+
+servers:
+  - url: http://localhost:8081
+    description: Local development server
+
+tags:
+  - name: Vehicles
+    description: Manage delivery vehicles
+  - name: Deliveries
+    description: Manage delivery operations
+  - name: Warehouses
+    description: Manage warehouse locations and schedules
+  - name: Tours
+    description: Manage tours and associated deliveries
+
+paths:
+  /api/vehicles:
+    $ref: './vehicles.yaml#/paths/~1api~1vehicles'
+  /api/vehicles/{id}:
+    $ref: './vehicles.yaml#/paths/~1api~1vehicles~1{id}'
+
+  /api/deliveries:
+    $ref: './deliveries.yaml#/paths/~1api~1deliveries'
+  /api/deliveries/{id}:
+    $ref: './deliveries.yaml#/paths/~1api~1deliveries~1{id}'
+
+  /api/warehouses:
+    $ref: './warehouses.yaml#/paths/~1api~1warehouses'
+  /api/warehouses/{id}:
+    $ref: './warehouses.yaml#/paths/~1api~1warehouses~1{id}'
+
+  /api/tours:
+    $ref: './tours.yaml#/paths/~1api~1tours'
+  /api/tours/{id}:
+    $ref: './tours.yaml#/paths/~1api~1tours~1{id}'
+
+components:
+  schemas:
+    VehicleDTO:
+      $ref: './vehicles.yaml#/components/schemas/VehicleDTO'
+    DeliveryDTO:
+      $ref: './deliveries.yaml#/components/schemas/DeliveryDTO'
+    WarehouseDTO:
+      $ref: './warehouses.yaml#/components/schemas/WarehouseDTO'
+    TourDTO:
+      $ref: './tours.yaml#/components/schemas/TourDTO'

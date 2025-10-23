@@ -78,6 +78,12 @@ delivery-optimizer/
 │   │   │       │   ├── WarehouseDTO.java
 │   │   │       │   └── VehicleDTO.java
 │   │   │       │
+│   │   │       ├── mapper/              # 🧭 Mappers (Entity ↔ DTO)
+│   │   │       │   ├── DeliveryMapper.java
+│   │   │       │   ├── TourMapper.java
+│   │   │       │   ├── WarehouseMapper.java
+│   │   │       │   └── VehicleMapper.java
+│   │   │       │
 │   │   │       ├── repository/          # 🗄️ Data Access Layer
 │   │   │       │   ├── WarehouseRepository.java
 │   │   │       │   ├── VehicleRepository.java
@@ -91,7 +97,10 @@ delivery-optimizer/
 │   │   │       │   └── impl/
 │   │   │       │       ├── NearestNeighborOptimizer.java
 │   │   │       │       ├── ClarkeWrightOptimizer.java
-│   │   │       │       └── TourService.java
+│   │   │       │       ├── TourService.java
+│   │   │       │       ├── VehicleService.java
+│   │   │       │       ├── DeliveryService.java
+│   │   │       │       └── WarehouseService.java
 │   │   │       │
 │   │   │       ├── controller/          # 🎮 REST API Controllers
 │   │   │       │   ├── DeliveryController.java
@@ -109,6 +118,12 @@ delivery-optimizer/
 │   │   │
 │   │   └── resources/
 │   │       ├── static/
+│   │       │   ├── openapi.yaml
+│   │       │   ├── vehicles.yaml
+│   │       │   ├── tours.yaml
+│   │       │   ├── warehouses.yaml
+│   │       │   └── deliveries.yaml
+│   │       │   
 │   │       ├── templates/
 │   │       ├── application.properties   # ⚙️ Database and server configuration
 │   │       ├── applicationContext.xml   # 🧩 Bean configuration and DI
