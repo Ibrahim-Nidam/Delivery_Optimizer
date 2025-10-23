@@ -43,4 +43,11 @@ public class TourController {
     public void deleteTour(@PathVariable Long id){
         tourService.deleteTour(id);
     }
+
+    @PostMapping("/{id}/deliveries")
+    @ResponseStatus(HttpStatus.OK)
+    public TourDTO addDeliveriesToTour(@PathVariable Long id, @Valid @RequestBody List<Long> deliveryIds){
+        return tourService.addDeliveriesToTour(id, deliveryIds);
+    }
+
 }
