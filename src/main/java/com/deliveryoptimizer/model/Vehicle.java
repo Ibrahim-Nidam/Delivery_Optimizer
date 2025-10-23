@@ -6,6 +6,8 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "vehicles")
 @Getter
@@ -34,4 +36,6 @@ public class Vehicle {
     @Min(1)
     private int maxDeliveries;
 
+    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)
+    List<Tour> tours;
 }

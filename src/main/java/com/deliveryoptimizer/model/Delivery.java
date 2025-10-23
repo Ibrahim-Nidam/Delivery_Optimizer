@@ -32,4 +32,7 @@ public class Delivery {
     private DeliveryStatus status;
 
     private String timeSlot;
+
+    @ManyToOne
+    Tour tour;
 }

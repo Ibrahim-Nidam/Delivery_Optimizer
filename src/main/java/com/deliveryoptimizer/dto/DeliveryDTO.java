@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class DeliveryDTO {
     private Long id;
+    private Long tourId;
     private double altitude;
     private double longitude;
     private double maxWeight;
