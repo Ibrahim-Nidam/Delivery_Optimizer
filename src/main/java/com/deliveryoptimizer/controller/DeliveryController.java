@@ -1,7 +1,7 @@
 package com.deliveryoptimizer.controller;
 
 import com.deliveryoptimizer.dto.DeliveryDTO;
-import com.deliveryoptimizer.service.impl.DeliveryService;
+import com.deliveryoptimizer.service.interfaces.DeliveryService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
