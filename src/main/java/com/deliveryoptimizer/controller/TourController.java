@@ -50,4 +50,8 @@ public class TourController {
         return tourService.addDeliveriesToTour(id, deliveryIds);
     }
 
+    @GetMapping("/{id}/optimize/nn")
+    public List<Long> optimizeTour(@PathVariable Long id){
+        return tourService.optimizeTour(id);
+    }
 }

@@ -40,6 +40,8 @@ paths:
     $ref: './tours.yaml#/paths/~1api~1tours~1{id}'
   /api/tours/{id}/deliveries:
     $ref: './tours.yaml#/paths/~1api~1tours~1{id}~1deliveries'
+  /api/tours/{id}/optimize/nn:
+    $ref: './tours.yaml#/paths/~1api~1tours~1{id}~1optimize~1nn'
 
 components:
   schemas:

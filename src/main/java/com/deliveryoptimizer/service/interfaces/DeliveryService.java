@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface DeliveryService {
 
-    public DeliveryDTO createDelivery(DeliveryDTO dto);
-    public List<DeliveryDTO> getAllDeliveries();
-    public DeliveryDTO getDeliveryById(Long id);
-    public DeliveryDTO updateDelivery(Long id, DeliveryDTO dto);
-    public void deleteDelivery(Long id);
+    DeliveryDTO createDelivery(DeliveryDTO dto);
+    List<DeliveryDTO> getAllDeliveries();
+    DeliveryDTO getDeliveryById(Long id);
+    DeliveryDTO updateDelivery(Long id, DeliveryDTO dto);
+    void deleteDelivery(Long id);
 
 }
