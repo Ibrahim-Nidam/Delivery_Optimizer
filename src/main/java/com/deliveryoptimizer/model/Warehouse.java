@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Table(name = "warehouses")
@@ -30,4 +31,6 @@ public class Warehouse {
 
     private LocalTime closeTime;
 
+    @OneToMany(mappedBy = "warehouse", cascade = CascadeType.ALL)
+    List<Tour> tours;
 }

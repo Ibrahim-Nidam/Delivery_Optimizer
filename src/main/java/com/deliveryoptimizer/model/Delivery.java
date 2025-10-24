@@ -1,6 +1,7 @@
 package com.deliveryoptimizer.model;
 
 import com.deliveryoptimizer.model.enums.DeliveryStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.*;
@@ -32,4 +33,9 @@ public class Delivery {
     private DeliveryStatus status;
 
     private String timeSlot;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tour_id")
+    @JsonIgnore
+    Tour tour;
 }

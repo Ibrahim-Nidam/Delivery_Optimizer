@@ -92,15 +92,19 @@ delivery-optimizer/
 │   │   │       │
 │   │   │       ├── service/             # 💼 Business Layer
 │   │   │       │   ├── interfaces/
-│   │   │       │   │   └── TourOptimizer.java
+│   │   │       │   │   ├── TourOptimizer.java
+│   │   │       │   │   ├── TourService.java
+│   │   │       │   │   ├── VehicleService.java
+│   │   │       │   │   ├── DeliveryService.java
+│   │   │       │   │   └── WarehouseService.java
 │   │   │       │   │
 │   │   │       │   └── impl/
 │   │   │       │       ├── NearestNeighborOptimizer.java
 │   │   │       │       ├── ClarkeWrightOptimizer.java
-│   │   │       │       ├── TourService.java
-│   │   │       │       ├── VehicleService.java
-│   │   │       │       ├── DeliveryService.java
-│   │   │       │       └── WarehouseService.java
+│   │   │       │       ├── TourServiceImpl.java
+│   │   │       │       ├── VehicleServiceImpl.java
+│   │   │       │       ├── DeliveryServiceImpl.java
+│   │   │       │       └── WarehouseServiceImpl.java
 │   │   │       │
 │   │   │       ├── controller/          # 🎮 REST API Controllers
 │   │   │       │   ├── DeliveryController.java

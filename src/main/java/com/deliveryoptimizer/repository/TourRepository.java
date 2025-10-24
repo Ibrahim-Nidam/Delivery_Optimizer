@@ -1,4 +1,9 @@
 package com.deliveryoptimizer.repository;
 
-public interface TourRepository {
+import com.deliveryoptimizer.model.Tour;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TourRepository extends JpaRepository<Tour, Long> {
+    boolean existsByVehicleId(Long vehicleId);
+    boolean existsByWarehouseId(Long warehouseId);
 }

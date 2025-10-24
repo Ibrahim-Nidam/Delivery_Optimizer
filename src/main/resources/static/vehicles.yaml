@@ -23,13 +23,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VehicleDTO'
+              $ref: '#/components/schemas/VehicleInputDTO'
             example:
               name: "Truck A"
               type: "TRUCK"
-              maxWeight: 5000
-              maxVolume: 12.5
-              maxDeliveries: 10
       responses:
         '201':
           description: Vehicle created successfully
@@ -74,7 +71,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VehicleDTO'
+              $ref: '#/components/schemas/VehicleInputDTO'
+            example:
+              name: "Truck B"
+              type: "TRUCK"
       responses:
         '200':
           description: Vehicle updated successfully
@@ -119,16 +119,30 @@ components:
           type: number
           format: double
           example: 5000.0
+          readOnly: true
         maxVolume:
           type: number
           format: double
-          example: 12.5
+          example: 40.0
+          readOnly: true
         maxDeliveries:
           type: integer
-          example: 10
+          example: 100
+          readOnly: true
+      required:
+        - id
+        - name
+        - type
+
+    VehicleInputDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Truck A"
+        type:
+          type: string
+          enum: ["TRUCK", "VAN", "BIKE"]
       required:
         - name
         - type
-        - maxWeight
-        - maxVolume
-        - maxDeliveries

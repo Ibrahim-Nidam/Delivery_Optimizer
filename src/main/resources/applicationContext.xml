@@ -40,16 +40,20 @@
                       transaction-manager-ref="transactionManager"/>
 
     <!-- ===================== SERVICES & OPTIMIZERS ===================== -->
-    <bean id="vehicleService" class="com.deliveryoptimizer.service.impl.VehicleService">
+    <bean id="vehicleService" class="com.deliveryoptimizer.service.impl.VehicleServiceImpl">
         <constructor-arg ref="vehicleRepository" />
     </bean>
 
-    <bean id="deliveryService" class="com.deliveryoptimizer.service.impl.DeliveryService">
+    <bean id="deliveryService" class="com.deliveryoptimizer.service.impl.DeliveryServiceImpl">
         <constructor-arg ref="deliveryRepository" />
     </bean>
 
-    <bean id="warehouseService" class="com.deliveryoptimizer.service.impl.WarehouseService">
+    <bean id="warehouseService" class="com.deliveryoptimizer.service.impl.WarehouseServiceImpl">
         <constructor-arg ref="warehouseRepository" />
+    </bean>
+
+    <bean id="tourService" class="com.deliveryoptimizer.service.impl.TourServiceImpl">
+        <constructor-arg ref="tourRepository" />
     </bean>
 
 

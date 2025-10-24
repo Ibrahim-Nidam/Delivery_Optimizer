@@ -1,7 +1,9 @@
 package com.deliveryoptimizer.controller;
 
 import com.deliveryoptimizer.dto.WarehouseDTO;
-import com.deliveryoptimizer.service.impl.WarehouseService;
+import com.deliveryoptimizer.service.interfaces.WarehouseService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +18,8 @@ public class WarehouseController {
     }
 
     @PostMapping
-    public WarehouseDTO createWarehouse(@RequestBody WarehouseDTO dto){
+    @ResponseStatus(HttpStatus.CREATED)
+    public WarehouseDTO createWarehouse(@Valid @RequestBody WarehouseDTO dto){
         return warehouseService.createWarehouse(dto);
     }
 
@@ -31,11 +34,12 @@ public class WarehouseController {
     }
 
     @PutMapping("/{id}")
-    public WarehouseDTO updateWarehouse(@PathVariable Long id, @RequestBody WarehouseDTO dto){
+    public WarehouseDTO updateWarehouse(@PathVariable Long id, @Valid @RequestBody WarehouseDTO dto){
         return warehouseService.updateWarehouse(id, dto);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteWarehouse(@PathVariable Long id){
         warehouseService.deleteWarehouse(id);
     }
