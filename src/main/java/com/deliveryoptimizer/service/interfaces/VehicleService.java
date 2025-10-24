@@ -8,10 +8,10 @@ import java.util.List;
 
 public interface VehicleService {
 
-    public VehicleDTO createVehicle(VehicleDTO dto);
-    public List<VehicleDTO> getAllVehicles();
-    public VehicleDTO getVehicleById(Long id);
-    public VehicleDTO updateVehicle(Long id, VehicleDTO dto);
-    public void deleteVehicle(Long id);
+    VehicleDTO createVehicle(VehicleDTO dto);
+    List<VehicleDTO> getAllVehicles();
+    VehicleDTO getVehicleById(Long id);
+    VehicleDTO updateVehicle(Long id, VehicleDTO dto);
+    void deleteVehicle(Long id);
 
 }
