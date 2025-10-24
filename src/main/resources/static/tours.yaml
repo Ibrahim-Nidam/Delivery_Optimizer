@@ -145,6 +145,112 @@ paths:
         '404':
           description: Tour or deliveries not found
 
+  /api/tours/{id}/optimize/nn:
+    get:
+      tags: [Tours]
+      summary: Optimize tour using Nearest Neighbor algorithm
+      description: |
+        Optimizes the delivery order using the Nearest Neighbor algorithm.
+        
+        **Algorithm principle:** Always visit the closest unvisited delivery point.
+        
+        **Step-by-step calculation example:**
+        - Step 1: From Warehouse → Delivery A (5km) - closest delivery
+        - Step 2: From A → Delivery C (8km) - closest unvisited
+        - Step 3: From C → Delivery B (7km) - closest unvisited
+        - Step 4: From B → Delivery D (6km) - only remaining delivery
+        - Step 5: From D → Warehouse (20km) - return to warehouse
+        
+        **Final tour:** Warehouse → A → C → B → D → Warehouse
+        
+        **Total distance:** 5 + 8 + 7 + 6 + 20 = 46km
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the tour to optimize
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Tour optimized successfully with detailed route information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptimizationResultDTO'
+              example:
+                tourId: 1
+                algorithm: "Nearest Neighbor"
+                optimizedDeliveryIds: [3, 1, 2, 4]
+                totalDistance: 46.0
+                steps:
+                  - stepNumber: 1
+                    from: "Warehouse (Main)"
+                    to: "Delivery A"
+                    fromId: null
+                    toId: 3
+                    distance: 5.0
+                    cumulativeDistance: 5.0
+                  - stepNumber: 2
+                    from: "Delivery A"
+                    to: "Delivery C"
+                    fromId: 3
+                    toId: 1
+                    distance: 8.0
+                    cumulativeDistance: 13.0
+                  - stepNumber: 3
+                    from: "Delivery C"
+                    to: "Delivery B"
+                    fromId: 1
+                    toId: 2
+                    distance: 7.0
+                    cumulativeDistance: 20.0
+                  - stepNumber: 4
+                    from: "Delivery B"
+                    to: "Delivery D"
+                    fromId: 2
+                    toId: 4
+                    distance: 6.0
+                    cumulativeDistance: 26.0
+                  - stepNumber: 5
+                    from: "Delivery D"
+                    to: "Warehouse (Main)"
+                    fromId: 4
+                    toId: null
+                    distance: 20.0
+                    cumulativeDistance: 46.0
+                warehouseLocation:
+                  name: "Main Warehouse"
+                  latitude: 33.5731
+                  longitude: -7.5898
+                deliveries:
+                  - id: 3
+                    customerName: "Client A"
+                    address: "123 Rue A, Casablanca"
+                    latitude: 33.5800
+                    longitude: -7.5850
+                  - id: 1
+                    customerName: "Client C"
+                    address: "789 Rue C, Casablanca"
+                    latitude: 33.5900
+                    longitude: -7.5800
+                  - id: 2
+                    customerName: "Client B"
+                    address: "456 Rue B, Casablanca"
+                    latitude: 33.5850
+                    longitude: -7.5750
+                  - id: 4
+                    customerName: "Client D"
+                    address: "321 Rue D, Casablanca"
+                    latitude: 33.5950
+                    longitude: -7.5700
+        '404':
+          description: Tour not found
+        '400':
+          description: Tour has no deliveries to optimize
+
+
 components:
   schemas:
     TourDTO:
@@ -182,3 +288,114 @@ components:
         - date
         - totalDistance
         - status
+
+    OptimizationResultDTO:
+      type: object
+      description: Detailed result of tour optimization showing step-by-step route calculation
+      properties:
+        tourId:
+          type: integer
+          description: ID of the optimized tour
+          example: 1
+        algorithm:
+          type: string
+          description: Name of the optimization algorithm used
+          example: "Nearest Neighbor"
+        optimizedDeliveryIds:
+          type: array
+          description: List of delivery IDs in optimized order
+          items:
+            type: integer
+          example: [3, 1, 2, 4]
+        totalDistance:
+          type: number
+          format: double
+          description: Total distance of the optimized tour in kilometers
+          example: 46.0
+        steps:
+          type: array
+          description: Step-by-step breakdown of the route with distances
+          items:
+            $ref: '#/components/schemas/RouteStepDTO'
+        warehouseLocation:
+          $ref: '#/components/schemas/LocationDTO'
+        deliveries:
+          type: array
+          description: List of deliveries in optimized order with location details
+          items:
+            $ref: '#/components/schemas/DeliveryLocationDTO'
+
+    RouteStepDTO:
+      type: object
+      description: A single step in the optimized route
+      properties:
+        stepNumber:
+          type: integer
+          description: Sequential step number
+          example: 1
+        from:
+          type: string
+          description: Starting point name
+          example: "Warehouse (Main)"
+        to:
+          type: string
+          description: Destination point name
+          example: "Delivery A"
+        fromId:
+          type: integer
+          nullable: true
+          description: ID of the starting delivery (null if warehouse)
+          example: null
+        toId:
+          type: integer
+          nullable: true
+          description: ID of the destination delivery (null if warehouse)
+          example: 3
+        distance:
+          type: number
+          format: double
+          description: Distance for this step in kilometers
+          example: 5.0
+        cumulativeDistance:
+          type: number
+          format: double
+          description: Total distance accumulated up to this step
+          example: 5.0
+
+    LocationDTO:
+      type: object
+      description: Geographic location information
+      properties:
+        name:
+          type: string
+          example: "Main Warehouse"
+        latitude:
+          type: number
+          format: double
+          example: 33.5731
+        longitude:
+          type: number
+          format: double
+          example: -7.5898
+
+    DeliveryLocationDTO:
+      type: object
+      description: Delivery point with location details
+      properties:
+        id:
+          type: integer
+          example: 3
+        customerName:
+          type: string
+          example: "Client A"
+        address:
+          type: string
+          example: "123 Rue A, Casablanca"
+        latitude:
+          type: number
+          format: double
+          example: 33.5800
+        longitude:
+          type: number
+          format: double
+          example: -7.5850
