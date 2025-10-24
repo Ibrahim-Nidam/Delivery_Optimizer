@@ -21,12 +21,14 @@ public class TourServiceImpl implements TourService {
     private final DeliveryRepository deliveryRepository;
     private final WarehouseRepository warehouseRepository;
     private final VehicleRepository vehicleRepository;
+    private final NearestNeighborOptimizer nearestNeighborOptimizer;
 
-    public TourServiceImpl(TourRepository tourRepository, DeliveryRepository deliveryRepository, WarehouseRepository warehouseRepository, VehicleRepository vehicleRepository){
+    public TourServiceImpl(TourRepository tourRepository, DeliveryRepository deliveryRepository, WarehouseRepository warehouseRepository, VehicleRepository vehicleRepository, NearestNeighborOptimizer nearestNeighborOptimizer){
         this.tourRepository = tourRepository;
         this.vehicleRepository = vehicleRepository;
         this.warehouseRepository = warehouseRepository;
         this.deliveryRepository = deliveryRepository;
+        this.nearestNeighborOptimizer = nearestNeighborOptimizer;
     }
 
     @Override
@@ -181,5 +183,19 @@ public class TourServiceImpl implements TourService {
         deliveryRepository.saveAll(deliveries);
 
         return TourMapper.toDTO(tour);
+    }
+
+    public List<Long> optimizeTour(Long tourId){
+        Tour tour = tourRepository.findById(tourId)
+                .orElseThrow(() -> new RuntimeException("Tour Not Found!"));
+
+        List<Delivery> optimized = nearestNeighborOptimizer.optimizerTour(tour);
+
+        tour.setDeliveries(optimized);
+        tourRepository.save(tour);
+
+        return optimized.stream()
+                .map(Delivery::getId)
+                .toList();
     }
 }
