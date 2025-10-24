@@ -1,8 +1,7 @@
 package com.deliveryoptimizer.controller;
 
 import com.deliveryoptimizer.dto.VehicleDTO;
-import com.deliveryoptimizer.service.impl.VehicleService;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import com.deliveryoptimizer.service.interfaces.VehicleService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
