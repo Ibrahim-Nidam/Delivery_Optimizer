@@ -23,9 +23,6 @@ public class VehicleMapper {
                 .id(dto.getId())
                 .name(dto.getName())
                 .type(dto.getType())
-                .maxWeight(dto.getMaxWeight())
-                .maxVolume(dto.getMaxVolume())
-                .maxDeliveries(dto.getMaxDeliveries())
                 .build();
     }
 }

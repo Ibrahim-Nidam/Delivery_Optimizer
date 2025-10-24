@@ -18,6 +18,11 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public VehicleDTO createVehicle(VehicleDTO dto){
         Vehicle vehicle = VehicleMapper.toEntity(dto);
+
+        vehicle.setMaxWeight(vehicle.getType().getMaxWeightKg());
+        vehicle.setMaxVolume(vehicle.getType().getMaxVolumeM3());
+        vehicle.setMaxDeliveries(vehicle.getType().getMaxDeliveries());
+
         Vehicle saved = vehicleRepository.save(vehicle);
         return VehicleMapper.toDTO(saved);
     }
@@ -44,9 +49,10 @@ public class VehicleServiceImpl implements VehicleService {
 
         vehicle.setName(dto.getName());
         vehicle.setType(dto.getType());
-        vehicle.setMaxWeight(dto.getMaxWeight());
-        vehicle.setMaxVolume(dto.getMaxVolume());
-        vehicle.setMaxDeliveries(dto.getMaxDeliveries());
+
+        vehicle.setMaxWeight(vehicle.getType().getMaxWeightKg());
+        vehicle.setMaxVolume(vehicle.getType().getMaxVolumeM3());
+        vehicle.setMaxDeliveries(vehicle.getType().getMaxDeliveries());
 
         Vehicle saved = vehicleRepository.save(vehicle);
 
