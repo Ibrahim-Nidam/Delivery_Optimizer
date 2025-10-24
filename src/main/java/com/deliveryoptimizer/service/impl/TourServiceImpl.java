@@ -12,22 +12,24 @@ import com.deliveryoptimizer.repository.DeliveryRepository;
 import com.deliveryoptimizer.repository.TourRepository;
 import com.deliveryoptimizer.repository.VehicleRepository;
 import com.deliveryoptimizer.repository.WarehouseRepository;
+import com.deliveryoptimizer.service.interfaces.TourService;
 
 import java.util.List;
 
-public class TourService {
+public class TourServiceImpl implements TourService {
     private final TourRepository tourRepository;
     private final DeliveryRepository deliveryRepository;
     private final WarehouseRepository warehouseRepository;
     private final VehicleRepository vehicleRepository;
 
-    public TourService(TourRepository tourRepository, DeliveryRepository deliveryRepository, WarehouseRepository warehouseRepository, VehicleRepository vehicleRepository){
+    public TourServiceImpl(TourRepository tourRepository, DeliveryRepository deliveryRepository, WarehouseRepository warehouseRepository, VehicleRepository vehicleRepository){
         this.tourRepository = tourRepository;
         this.vehicleRepository = vehicleRepository;
         this.warehouseRepository = warehouseRepository;
         this.deliveryRepository = deliveryRepository;
     }
 
+    @Override
     public TourDTO createTour(TourDTO dto){
         Vehicle vehicle = vehicleRepository.findById(dto.getVehicleId())
                 .orElseThrow(() -> new RuntimeException("Vehicle Not Found!"));
@@ -35,7 +37,6 @@ public class TourService {
         Warehouse warehouse = warehouseRepository.findById(dto.getWarehouseId())
                 .orElseThrow(() -> new RuntimeException("Warehouse Not Found!"));
 
-        // 🔹 Check if warehouse already used (optional rule)
         if (tourRepository.existsByWarehouseId(warehouse.getId())) {
             throw new RuntimeException("This warehouse is already assigned to another tour");
         }
@@ -54,25 +55,27 @@ public class TourService {
         tour.setDeliveries(deliveries);
         tour.setStatus(TourStatus.PLANNED);
 
-        // 🔹 Save and update deliveries
         Tour saved = tourRepository.save(tour);
         deliveries.forEach(d -> d.setTour(saved));
         deliveryRepository.saveAll(deliveries);
         return TourMapper.toDTO(saved);
     }
 
+    @Override
     public List<TourDTO> getAllTours(){
         return tourRepository.findAll().stream()
                 .map(TourMapper::toDTO)
                 .toList();
     }
 
+    @Override
     public TourDTO getTourById(Long id){
         return tourRepository.findById(id)
                 .map(TourMapper::toDTO)
                 .orElseThrow(() -> new RuntimeException("Tour Not Found!"));
     }
 
+    @Override
     public TourDTO updateTour(Long id, TourDTO dto){
         Tour existingTour = tourRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Tour not found"));
@@ -83,21 +86,18 @@ public class TourService {
         Warehouse warehouse = warehouseRepository.findById(dto.getWarehouseId())
                 .orElseThrow(() -> new RuntimeException("Warehouse not found"));
 
-        // 🔹 Ensure vehicle isn’t used by another tour
         boolean vehicleInUse = tourRepository.existsByVehicleId(vehicle.getId())
                 && !existingTour.getVehicle().getId().equals(vehicle.getId());
         if (vehicleInUse) {
             throw new RuntimeException("This vehicle is already assigned to another tour");
         }
 
-        // 🔹 Ensure warehouse isn’t used by another tour
         boolean warehouseInUse = tourRepository.existsByWarehouseId(warehouse.getId())
                 && !existingTour.getWarehouse().getId().equals(warehouse.getId());
         if (warehouseInUse) {
             throw new RuntimeException("This warehouse is already assigned to another tour");
         }
 
-        // 🔹 Handle deliveries
         List<Delivery> deliveries = deliveryRepository.findAllById(dto.getDeliveryIds());
 
         boolean hasAssignedDeliveries = deliveries.stream()
@@ -106,18 +106,15 @@ public class TourService {
             throw new RuntimeException("One or more deliveries are already assigned to another tour");
         }
 
-        // 🔹 Unlink old deliveries
         existingTour.getDeliveries().forEach(d -> d.setTour(null));
         deliveryRepository.saveAll(existingTour.getDeliveries());
 
-        // 🔹 Update fields
         existingTour.setDate(dto.getDate());
         existingTour.setVehicle(vehicle);
         existingTour.setWarehouse(warehouse);
         existingTour.setStatus(dto.getStatus());
         existingTour.setDeliveries(deliveries);
 
-        // 🔹 Save tour + deliveries
         Tour saved = tourRepository.save(existingTour);
         deliveries.forEach(d -> d.setTour(saved));
         deliveryRepository.saveAll(deliveries);
@@ -125,10 +122,12 @@ public class TourService {
         return TourMapper.toDTO(saved);
     }
 
+    @Override
     public void deleteTour(Long id){
         tourRepository.deleteById(id);
     }
 
+    @Override
     public TourDTO addDeliveriesToTour(Long tourId, List<Long> deliveryIds){
         Tour tour = tourRepository.findById(tourId)
                 .orElseThrow(() -> new RuntimeException("Tour Not Found!"));
