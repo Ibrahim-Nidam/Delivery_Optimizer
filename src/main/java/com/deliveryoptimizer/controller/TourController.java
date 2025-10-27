@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/tours")
@@ -58,4 +59,7 @@ public class TourController {
 
     @GetMapping("/{id}/optimize/cw")
     public List<Long> OptimizeTour(@PathVariable Long id) { return tourService.optimizeTour(id, OptimizationMethod.CW); }
+
+    @GetMapping("/{id}/distances")
+    public Map<String, String> getTotalDistances(@PathVariable Long id){ return tourService.getTourDistances(id); }
 }
