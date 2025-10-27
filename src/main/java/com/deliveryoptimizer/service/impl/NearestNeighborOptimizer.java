@@ -35,6 +35,8 @@ public class NearestNeighborOptimizer implements TourOptimizer {
                 }
             }
 
+            if(nearest == null) break;
+
             ordered.add(nearest);
             remaining.remove(nearest);
             currentLat = nearest.getAltitude();
