@@ -58,6 +58,7 @@
         <constructor-arg ref="warehouseRepository" />
         <constructor-arg ref="vehicleRepository" />
         <constructor-arg ref="nearestNeighborOptimizer" />
+        <constructor-arg ref="distanceCalculator"/>
     </bean>
 
     <bean id="nearestNeighborOptimizer" class="com.deliveryoptimizer.service.impl.NearestNeighborOptimizer">

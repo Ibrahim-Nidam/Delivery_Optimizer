@@ -355,6 +355,43 @@ paths:
         '400':
           description: Tour has no deliveries to optimize
 
+  /api/tours/{id}/distances:
+    get:
+      tags: [ Tours ]
+      summary: Get total distances for a tour using both optimization algorithms
+      description: >
+        Calculates the total distances of a tour if optimized using:
+        - Nearest Neighbor (NN)
+        - Clarke & Wright (CW)
+
+        Returns both distances with units for comparison.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the tour
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Distances calculated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  "Nearest Neighbor":
+                    type: string
+                    description: Total distance using Nearest Neighbor algorithm (with unit)
+                    example: "8.3 km"
+                  "Clarke Wright":
+                    type: string
+                    description: Total distance using Clarke & Wright algorithm (with unit)
+                    example: "8.5 km"
+        '404':
+          description: Tour not found
+
 components:
   schemas:
     TourDTO:

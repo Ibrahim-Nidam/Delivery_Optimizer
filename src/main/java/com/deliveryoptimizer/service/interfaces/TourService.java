@@ -4,6 +4,7 @@ import com.deliveryoptimizer.dto.TourDTO;
 import com.deliveryoptimizer.model.enums.OptimizationMethod;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TourService {
 
@@ -14,5 +15,5 @@ public interface TourService {
     void deleteTour(Long id);
     TourDTO addDeliveriesToTour(Long tourId, List<Long> deliveryIds);
     List<Long> optimizeTour(Long tourId, OptimizationMethod method);
-
+    Map<String, String> getTourDistances(Long tourId);
 }

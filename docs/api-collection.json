@@ -1,0 +1,889 @@
+{
+  "type": "collection.insomnia.rest/5.0",
+  "name": "Logistics",
+  "meta": {
+    "id": "wrk_2309c40ca2b248df8d66f8db9d768941",
+    "created": 1761130668556,
+    "modified": 1761130668556,
+    "description": ""
+  },
+  "collection": [
+    {
+      "name": "Vehicles CRUD",
+      "meta": {
+        "id": "fld_768ee0376dbe4e6a8f344f852fcb5e9c",
+        "created": 1761130693101,
+        "modified": 1761300495712,
+        "sortKey": -1761130693101,
+        "description": ""
+      },
+      "children": [
+        {
+          "url": "{{ _.in }}",
+          "name": "New Request",
+          "meta": {
+            "id": "req_d192d1aef84a4a4792b835cb95709984",
+            "created": 1761130697661,
+            "modified": 1761131014066,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761130699774
+          },
+          "method": "GET",
+          "body": {
+            "mimeType": "application/json",
+            "text": ""
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.2.0"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "{{ _.in }}",
+          "name": "New Request",
+          "meta": {
+            "id": "req_763cb4e5ee5d4fbbb12b74b0913bbab2",
+            "created": 1761130976330,
+            "modified": 1761300540782,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761130699674
+          },
+          "method": "POST",
+          "body": {
+            "mimeType": "application/json",
+            "text": "{\n  \"name\": \"Truck A\",\n  \"type\": \"TRUCK\"\n}"
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.2.0"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "{{ _.in }}/2",
+          "name": "New Request",
+          "meta": {
+            "id": "req_2077b25a292f4a5f9ce7366a26c3e5a1",
+            "created": 1761131067682,
+            "modified": 1761131116380,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761130699574
+          },
+          "method": "GET",
+          "headers": [
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.2.0"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "{{ _.in }}/2",
+          "name": "New Request",
+          "meta": {
+            "id": "req_106b8fa074904e70b1165b76b5e69d69",
+            "created": 1761131152504,
+            "modified": 1761300566022,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761130699474
+          },
+          "method": "PUT",
+          "body": {
+            "mimeType": "application/json",
+            "text": "{\n  \"name\": \"Truck B\",\n  \"type\": \"TRUCK\"\n}"
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.2.0"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "{{ _.in }}/2",
+          "name": "New Request",
+          "meta": {
+            "id": "req_5b69106f550441ebb4dd463ff8325cfd",
+            "created": 1761131201092,
+            "modified": 1761300572284,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761130699374
+          },
+          "method": "DELETE",
+          "headers": [
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.2.0"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        }
+      ],
+      "environment": {
+        "in": "http://localhost:8081/api/vehicles"
+      }
+    },
+    {
+      "name": "Deliveries CRUD",
+      "meta": {
+        "id": "fld_014778a0dd7a47bd935f2a6b1d843b3b",
+        "created": 1761146057652,
+        "modified": 1761146089255,
+        "sortKey": -1761130693051,
+        "description": ""
+      },
+      "children": [
+        {
+          "url": "{{ _.in }}",
+          "name": "New Request",
+          "meta": {
+            "id": "req_13ec67193f8b4c568c75f054117f1db1",
+            "created": 1761146057656,
+            "modified": 1761146095694,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761130699774
+          },
+          "method": "GET",
+          "body": {
+            "mimeType": "application/json",
+            "text": ""
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.2.0"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "{{ _.in }}",
+          "name": "New Request",
+          "meta": {
+            "id": "req_7e483a102c9d4565865a3d04690d3717",
+            "created": 1761146057659,
+            "modified": 1761146119679,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761130699674
+          },
+          "method": "POST",
+          "body": {
+            "mimeType": "application/json",
+            "text": "{\n  \"altitude\": 33.5731,\n  \"longitude\": -7.5898,\n  \"maxWeight\": 500,\n  \"maxVolume\": 10,\n  \"status\": \"PENDING\",\n  \"timeSlot\": \"08:00-10:00\"\n}"
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.2.0"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "{{ _.in }}/1",
+          "name": "New Request",
+          "meta": {
+            "id": "req_95e4056a0930488d8ffdd9058e280c60",
+            "created": 1761146057660,
+            "modified": 1761146138514,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761130699574
+          },
+          "method": "GET",
+          "headers": [
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.2.0"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "{{ _.in }}/1",
+          "name": "New Request",
+          "meta": {
+            "id": "req_a586108031c646aeb0b0fbade86de06f",
+            "created": 1761146057661,
+            "modified": 1761146163955,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761130699474
+          },
+          "method": "PUT",
+          "body": {
+            "mimeType": "application/json",
+            "text": "{\n  \"id\": 1,\n  \"altitude\": 33.5731,\n  \"longitude\": -7.5898,\n  \"maxWeight\": 500,\n  \"maxVolume\": 10,\n  \"status\": \"PENDING\",\n  \"timeSlot\": \"08:00-10:00\"\n}"
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.2.0"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "{{ _.in }}/1",
+          "name": "New Request",
+          "meta": {
+            "id": "req_f80108c53b174e279bc40c2725981382",
+            "created": 1761146057663,
+            "modified": 1761146272279,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761130699374
+          },
+          "method": "DELETE",
+          "headers": [
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.2.0"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        }
+      ],
+      "environment": {
+        "in": "http://localhost:8081/api/deliveries"
+      }
+    },
+    {
+      "name": "warehouses CRUD",
+      "meta": {
+        "id": "fld_73e60d3355724ac7af1f3874291bf993",
+        "created": 1761150478444,
+        "modified": 1761150497017,
+        "sortKey": -1761130693001,
+        "description": ""
+      },
+      "children": [
+        {
+          "url": "{{ _.in }}",
+          "name": "New Request",
+          "meta": {
+            "id": "req_26908533ec0b451a9ea0ac693bf2dddb",
+            "created": 1761150478449,
+            "modified": 1761155825077,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761130699774
+          },
+          "method": "GET",
+          "body": {
+            "mimeType": "application/json",
+            "text": ""
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.2.0"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "{{ _.in }}",
+          "name": "New Request",
+          "meta": {
+            "id": "req_df00995026aa46d9ab3b0f0963bea7c8",
+            "created": 1761150478451,
+            "modified": 1761156007054,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761130699674
+          },
+          "method": "POST",
+          "body": {
+            "mimeType": "application/json",
+            "text": "{\n  \"address\": \"123 Logistics St\",\n  \"altitude\": 33.5731,\n  \"longitude\": -7.5898,\n  \"openTime\": \"08:00:00\",\n  \"closeTime\": \"18:00:00\"\n}"
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.2.0"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "{{ _.in }}/1",
+          "name": "New Request",
+          "meta": {
+            "id": "req_32a0d017779a427b9db4669c0cbf5960",
+            "created": 1761150478454,
+            "modified": 1761150478454,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761130699574
+          },
+          "method": "GET",
+          "headers": [
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.2.0"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "{{ _.in }}/1",
+          "name": "New Request",
+          "meta": {
+            "id": "req_c6b7c177f69e482fb53a5d7335a509f6",
+            "created": 1761150478456,
+            "modified": 1761156031117,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761130699474
+          },
+          "method": "PUT",
+          "body": {
+            "mimeType": "application/json",
+            "text": "{\n  \"address\": \"456 Updated Road\",\n  \"altitude\": 34.0001,\n  \"longitude\": -6.9001,\n  \"openTime\": \"07:00:00\",\n  \"closeTime\": \"17:00:00\"\n}"
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.2.0"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "{{ _.in }}/1",
+          "name": "New Request",
+          "meta": {
+            "id": "req_6dce931e4cc24ee58148120efb89a544",
+            "created": 1761150478458,
+            "modified": 1761150478458,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761130699374
+          },
+          "method": "DELETE",
+          "headers": [
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.2.0"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        }
+      ],
+      "environment": {
+        "in": "http://localhost:8081/api/warehouses"
+      }
+    },
+    {
+      "name": "tours CRUD",
+      "meta": {
+        "id": "fld_51c1ea35518f4b5088625d18383a6404",
+        "created": 1761214795121,
+        "modified": 1761214805466,
+        "sortKey": -1761130692951,
+        "description": ""
+      },
+      "children": [
+        {
+          "url": "{{ _.in }}",
+          "name": "New Request",
+          "meta": {
+            "id": "req_a9c68a1a79f743dc8ca1c961d9c900b1",
+            "created": 1761214795123,
+            "modified": 1761214795123,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761130699774
+          },
+          "method": "GET",
+          "body": {
+            "mimeType": "application/json",
+            "text": ""
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.2.0"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "{{ _.in }}",
+          "name": "New Request",
+          "meta": {
+            "id": "req_1503ea4b907b4830a5f5d77d7a0ee8df",
+            "created": 1761214795125,
+            "modified": 1761217905548,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761130699674
+          },
+          "method": "POST",
+          "body": {
+            "mimeType": "application/json",
+            "text": "{\n  \"vehicleId\": 1,\n  \"deliveryIds\": [\n    1,\n    2,\n    3\n  ],\n  \"warehouseId\": 1,\n  \"date\": \"2025-10-24\",\n  \"totalDistance\": 120.5,\n  \"status\": \"PLANNED\"\n}"
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.2.0"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "{{ _.in }}/1",
+          "name": "New Request",
+          "meta": {
+            "id": "req_34ba87dc72014cfdb8300e35dc9ae524",
+            "created": 1761214795126,
+            "modified": 1761217912535,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761130699574
+          },
+          "method": "GET",
+          "headers": [
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.2.0"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "{{ _.in }}/1",
+          "name": "New Request",
+          "meta": {
+            "id": "req_92f1b5e032174891aaf43e4007cc5e07",
+            "created": 1761214795128,
+            "modified": 1761217924070,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761130699474
+          },
+          "method": "PUT",
+          "body": {
+            "mimeType": "application/json",
+            "text": "{\n  \"vehicleId\": 1,\n  \"deliveryIds\": [\n    1,\n    2,\n    3\n  ],\n  \"warehouseId\": 1,\n  \"date\": \"2025-10-20\",\n  \"totalDistance\": 130,\n  \"status\": \"IN_PROGRESS\"\n}"
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.2.0"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "{{ _.in }}/1",
+          "name": "New Request",
+          "meta": {
+            "id": "req_e835eb3ba514406ebe3c81b16e761818",
+            "created": 1761214795129,
+            "modified": 1761214795129,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761130699374
+          },
+          "method": "DELETE",
+          "headers": [
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.2.0"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "{{ _.in }}/1/deliveries",
+          "name": "Add More deliveries",
+          "meta": {
+            "id": "req_030688173858495887afa1ddfb6db2b2",
+            "created": 1761253007941,
+            "modified": 1761297472354,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761130699624
+          },
+          "method": "POST",
+          "body": {
+            "mimeType": "application/json",
+            "text": "[\n  7,\n  8,\n  9\n]"
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.2.0"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "{{ _.in }}/1/optimize/nn",
+          "name": "Nearest Neighbor",
+          "meta": {
+            "id": "req_98021ba7141b497c85814e7b36b96954",
+            "created": 1761319434753,
+            "modified": 1761319484692,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761319434753
+          },
+          "method": "GET",
+          "headers": [
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.6.2"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "{{ _.in }}/1/optimize/cw",
+          "name": "Clarke Wright",
+          "meta": {
+            "id": "req_bc777383922c4d32915a87d9cc0a56b0",
+            "created": 1761512439319,
+            "modified": 1761512445059,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761225067263.5
+          },
+          "method": "GET",
+          "headers": [
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.6.2"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "{{ _.in }}/1/distances",
+          "name": "Total Distances",
+          "meta": {
+            "id": "req_2c32487f56a2417d8504f63e595b4f7f",
+            "created": 1761581582319,
+            "modified": 1761581587831,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1761272251008.25
+          },
+          "method": "GET",
+          "headers": [
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.6.2"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        }
+      ],
+      "environment": {
+        "in": "http://localhost:8081/api/tours"
+      }
+    }
+  ],
+  "cookieJar": {
+    "name": "Default Jar",
+    "meta": {
+      "id": "jar_222e317715f4860f4e4e74bd059d0433dc049ebf",
+      "created": 1761130668583,
+      "modified": 1761130668583
+    }
+  },
+  "environments": {
+    "name": "Base Environment",
+    "meta": {
+      "id": "env_222e317715f4860f4e4e74bd059d0433dc049ebf",
+      "created": 1761130668578,
+      "modified": 1761130668578,
+      "isPrivate": false
+    }
+  }
+}
