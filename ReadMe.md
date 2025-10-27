@@ -244,20 +244,16 @@ mvn test
 
 ## 📊 UML Class Diagram
 
-![UML Diagram](docs/Delivery%20Optimizer.png)
+![UML Diagram](docs/Delivery_Optimizer.png)
 
 ---
 
 ## 📸 Application ScreenShots
 
-![Swagger](docs/CRUD.png)
+![Swagger](docs/swagger.png)
 
-![Swagger](docs/donor.png)
 
-![Swagger](docs/receiver.png)
-
-![Swagger](docs/association.png)
-
+![Swagger](docs/swagger%20Endpoints.png)
 
 ---
 
