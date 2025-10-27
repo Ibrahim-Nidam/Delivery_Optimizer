@@ -7,6 +7,7 @@ import com.deliveryoptimizer.model.Tour;
 import com.deliveryoptimizer.model.Vehicle;
 import com.deliveryoptimizer.model.Warehouse;
 import com.deliveryoptimizer.model.enums.DeliveryStatus;
+import com.deliveryoptimizer.model.enums.OptimizationMethod;
 import com.deliveryoptimizer.model.enums.TourStatus;
 import com.deliveryoptimizer.repository.DeliveryRepository;
 import com.deliveryoptimizer.repository.TourRepository;
@@ -22,13 +23,15 @@ public class TourServiceImpl implements TourService {
     private final WarehouseRepository warehouseRepository;
     private final VehicleRepository vehicleRepository;
     private final NearestNeighborOptimizer nearestNeighborOptimizer;
+    private final ClarkeWrightOptimizer clarkeWrightOptimizer;
 
-    public TourServiceImpl(TourRepository tourRepository, DeliveryRepository deliveryRepository, WarehouseRepository warehouseRepository, VehicleRepository vehicleRepository, NearestNeighborOptimizer nearestNeighborOptimizer){
+    public TourServiceImpl(TourRepository tourRepository, DeliveryRepository deliveryRepository, WarehouseRepository warehouseRepository, VehicleRepository vehicleRepository, NearestNeighborOptimizer nearestNeighborOptimizer, ClarkeWrightOptimizer clarkeWrightOptimizer){
         this.tourRepository = tourRepository;
         this.vehicleRepository = vehicleRepository;
         this.warehouseRepository = warehouseRepository;
         this.deliveryRepository = deliveryRepository;
         this.nearestNeighborOptimizer = nearestNeighborOptimizer;
+        this.clarkeWrightOptimizer = clarkeWrightOptimizer;
     }
 
     @Override
@@ -185,11 +188,17 @@ public class TourServiceImpl implements TourService {
         return TourMapper.toDTO(tour);
     }
 
-    public List<Long> optimizeTour(Long tourId){
+    public List<Long> optimizeTour(Long tourId, OptimizationMethod method){
         Tour tour = tourRepository.findById(tourId)
                 .orElseThrow(() -> new RuntimeException("Tour Not Found!"));
 
-        List<Delivery> optimized = nearestNeighborOptimizer.optimizerTour(tour);
+        List<Delivery> optimized;
+
+        switch (method){
+            case NN -> optimized = nearestNeighborOptimizer.optimizerTour(tour);
+            case CW -> optimized = clarkeWrightOptimizer.optimizerTour(tour);
+            default -> throw new IllegalArgumentException("Unsupported optimization method: " + method);
+        }
 
         tour.setDeliveries(optimized);
         tourRepository.save(tour);
@@ -198,4 +207,5 @@ public class TourServiceImpl implements TourService {
                 .map(Delivery::getId)
                 .toList();
     }
+
 }
