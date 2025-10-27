@@ -14,8 +14,13 @@ import com.deliveryoptimizer.repository.TourRepository;
 import com.deliveryoptimizer.repository.VehicleRepository;
 import com.deliveryoptimizer.repository.WarehouseRepository;
 import com.deliveryoptimizer.service.interfaces.TourService;
+import com.deliveryoptimizer.util.DistanceCalculator;
+import com.deliveryoptimizer.util.TourUtils;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TourServiceImpl implements TourService {
     private final TourRepository tourRepository;
@@ -24,14 +29,16 @@ public class TourServiceImpl implements TourService {
     private final VehicleRepository vehicleRepository;
     private final NearestNeighborOptimizer nearestNeighborOptimizer;
     private final ClarkeWrightOptimizer clarkeWrightOptimizer;
+    private final DistanceCalculator distanceCalculator;
 
-    public TourServiceImpl(TourRepository tourRepository, DeliveryRepository deliveryRepository, WarehouseRepository warehouseRepository, VehicleRepository vehicleRepository, NearestNeighborOptimizer nearestNeighborOptimizer, ClarkeWrightOptimizer clarkeWrightOptimizer){
+    public TourServiceImpl(TourRepository tourRepository, DeliveryRepository deliveryRepository, WarehouseRepository warehouseRepository, VehicleRepository vehicleRepository, NearestNeighborOptimizer nearestNeighborOptimizer, ClarkeWrightOptimizer clarkeWrightOptimizer, DistanceCalculator distanceCalculator){
         this.tourRepository = tourRepository;
         this.vehicleRepository = vehicleRepository;
         this.warehouseRepository = warehouseRepository;
         this.deliveryRepository = deliveryRepository;
         this.nearestNeighborOptimizer = nearestNeighborOptimizer;
         this.clarkeWrightOptimizer = clarkeWrightOptimizer;
+        this.distanceCalculator = distanceCalculator;
     }
 
     @Override
@@ -188,6 +195,7 @@ public class TourServiceImpl implements TourService {
         return TourMapper.toDTO(tour);
     }
 
+    @Override
     public List<Long> optimizeTour(Long tourId, OptimizationMethod method){
         Tour tour = tourRepository.findById(tourId)
                 .orElseThrow(() -> new RuntimeException("Tour Not Found!"));
@@ -208,4 +216,21 @@ public class TourServiceImpl implements TourService {
                 .toList();
     }
 
+    @Override
+    public Map<String, String> getTourDistances(Long tourId){
+        Tour tour = tourRepository.findById(tourId)
+                .orElseThrow(() -> new RuntimeException("Tour Not Found!"));
+
+        List<Delivery> nnOrder = nearestNeighborOptimizer.optimizerTour(tour);
+        double nnDistance = TourUtils.calculateTotalDistance(tour.getWarehouse(), nnOrder, distanceCalculator);
+
+        List<Delivery> cwOrder = clarkeWrightOptimizer.optimizerTour(tour);
+        double cwDistance = TourUtils.calculateTotalDistance(tour.getWarehouse(), cwOrder, distanceCalculator);
+
+        Map<String, String> distances = new LinkedHashMap<>();
+        distances.put("Nearest Neighbor", TourUtils.formatDistance(nnDistance));
+        distances.put("Clarke Wright", TourUtils.formatDistance(cwDistance));
+
+        return distances;
+    }
 }
