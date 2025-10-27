@@ -64,6 +64,10 @@
         <constructor-arg ref="distanceCalculator"/>
     </bean>
 
+    <bean id="clarckWrightOptimizer" class="com.deliveryoptimizer.service.impl.ClarkeWrightOptimizer">
+        <constructor-arg ref="distanceCalculator"/>
+    </bean>
+
     <!-- ===================== UTILITIES ===================== -->
     <bean id="distanceCalculator" class="com.deliveryoptimizer.util.DistanceCalculator"/>
 </beans>
