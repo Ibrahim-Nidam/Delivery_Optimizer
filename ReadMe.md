@@ -29,7 +29,7 @@ and automatically generates optimized delivery tours while respecting vehicle co
 
 ## 🛠️ Technologies Used
 
-* **Java 8+**
+* **Java 17+**
 * **Spring Boot**
 * **Spring Data JPA** with **H2 Database**
 * **Manual Dependency Injection** via `applicationContext.xml`
@@ -38,7 +38,7 @@ and automatically generates optimized delivery tours while respecting vehicle co
 * **Stream API & Collections API**
 * **Lombok** for boilerplate reduction
 * **JUnit 5** for unit testing
-* **SLF4J / java.util.logging** for logging
+* **java.util.logging** for logging
 * **Spring Boot DevTools** for hot reload
 * **SonarLint** for code quality
 * **Git & Jira** for project management
@@ -112,13 +112,8 @@ delivery-optimizer/
 │   │   │       │   ├── TourController.java
 │   │   │       │   └── WarehouseController.java
 │   │   │       │
-│   │   │       ├── config/              # ⚙️ XML + App Config
-│   │   │       │   ├── ApplicationConfig.java
-│   │   │       │   └── LoggingConfig.java
-│   │   │       │
 │   │   │       └── util/                # 🧮 Utilities
-│   │   │           ├── DistanceCalculator.java
-│   │   │           └── LoggerUtil.java
+│   │   │           └── DistanceCalculator.java
 │   │   │
 │   │   └── resources/
 │   │       ├── static/
@@ -136,7 +131,6 @@ delivery-optimizer/
 │   └── test/
 │       └── java/com/deliveryoptimizer/
 │           ├── service/
-│           │   ├── TourServiceTest.java
 │           │   ├── NearestNeighborTest.java
 │           │   └── ClarkeWrightTest.java
 │           └── util/
@@ -218,7 +212,7 @@ mvn spring-boot:run
 Then access:
 
 ```
-http://localhost:8080/swagger-ui.html
+http://localhost:8081/swagger-ui/index.html
 ```
 
 ### 2️⃣ Test with Postman
@@ -227,19 +221,18 @@ http://localhost:8080/swagger-ui.html
 * Endpoints available:
 
 | Entity       | Base URL                                | Methods                |
-| ------------ | --------------------------------------- | ---------------------- |
+| ------------ |-----------------------------------------| ---------------------- |
 | Warehouse    | `/api/warehouses`                       | GET, POST, PUT, DELETE |
 | Vehicle      | `/api/vehicles`                         | GET, POST, PUT, DELETE |
 | Delivery     | `/api/deliveries`                       | GET, POST, PUT, DELETE |
 | Tour         | `/api/tours`                            | GET, POST, PUT, DELETE |
-| Optimization | `/api/tours/optimize?method=NN` or `CW` | GET                    |
+| Optimization | `/api/tours/optimize?method=nn` or `cw` | GET                    |
 
 ### 3️⃣ Run Unit Tests
 
 ```bash
-mvn test
+  mvn test
 ```
-
 ---
 
 ## 📊 UML Class Diagram
