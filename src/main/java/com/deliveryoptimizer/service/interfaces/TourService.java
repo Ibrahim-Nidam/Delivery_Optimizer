@@ -1,6 +1,7 @@
 package com.deliveryoptimizer.service.interfaces;
 
 import com.deliveryoptimizer.dto.TourDTO;
+import com.deliveryoptimizer.model.enums.OptimizationMethod;
 
 import java.util.List;
 
@@ -12,6 +13,6 @@ public interface TourService {
     TourDTO updateTour(Long id, TourDTO dto);
     void deleteTour(Long id);
     TourDTO addDeliveriesToTour(Long tourId, List<Long> deliveryIds);
-    List<Long> optimizeTour(Long tourId);
+    List<Long> optimizeTour(Long tourId, OptimizationMethod method);
 
 }
