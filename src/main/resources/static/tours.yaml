@@ -250,6 +250,110 @@ paths:
         '400':
           description: Tour has no deliveries to optimize
 
+  /api/tours/{id}/optimize/cw:
+    get:
+      tags: [Tours]
+      summary: Optimize tour using Clarke & Wright algorithm
+      description: |
+        Optimizes the delivery order using the Clarke & Wright Savings algorithm.
+        
+        **Algorithm principle:** Merge delivery pairs that save the most distance, recalculating savings globally.
+        
+        **Step-by-step calculation example:**
+        - Step 1: Compute savings for all delivery pairs using formula:
+          Savings(i,j) = Distance(Warehouse,i) + Distance(Warehouse,j) - Distance(i,j)
+        - Step 2: Sort pairs by decreasing savings
+        - Step 3: Merge deliveries into tours according to savings, respecting vehicle constraints
+        - Step 4: Repeat until no more merges possible
+        - Step 5: Return final optimized tour sequence
+        
+        **Example for 4 deliveries:** Warehouse → A → B → D → C → Warehouse  
+        **Total distance:** 44 km (improvement vs Nearest Neighbor: 46 km)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the tour to optimize
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Tour optimized successfully with detailed route information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptimizationResultDTO'
+              example:
+                tourId: 1
+                algorithm: "Clarke & Wright"
+                optimizedDeliveryIds: [1, 2, 4, 3]
+                totalDistance: 44.0
+                steps:
+                  - stepNumber: 1
+                    from: "Warehouse (Main)"
+                    to: "Delivery A"
+                    fromId: null
+                    toId: 1
+                    distance: 5.0
+                    cumulativeDistance: 5.0
+                  - stepNumber: 2
+                    from: "Delivery A"
+                    to: "Delivery B"
+                    fromId: 1
+                    toId: 2
+                    distance: 12.0
+                    cumulativeDistance: 17.0
+                  - stepNumber: 3
+                    from: "Delivery B"
+                    to: "Delivery D"
+                    fromId: 2
+                    toId: 4
+                    distance: 6.0
+                    cumulativeDistance: 23.0
+                  - stepNumber: 4
+                    from: "Delivery D"
+                    to: "Delivery C"
+                    fromId: 4
+                    toId: 3
+                    distance: 11.0
+                    cumulativeDistance: 34.0
+                  - stepNumber: 5
+                    from: "Delivery C"
+                    to: "Warehouse (Main)"
+                    fromId: 3
+                    toId: null
+                    distance: 10.0
+                    cumulativeDistance: 44.0
+                warehouseLocation:
+                  name: "Main Warehouse"
+                  latitude: 33.5731
+                  longitude: -7.5898
+                deliveries:
+                  - id: 1
+                    customerName: "Client A"
+                    address: "123 Rue A, Casablanca"
+                    latitude: 33.5800
+                    longitude: -7.5850
+                  - id: 2
+                    customerName: "Client B"
+                    address: "456 Rue B, Casablanca"
+                    latitude: 33.5850
+                    longitude: -7.5750
+                  - id: 4
+                    customerName: "Client D"
+                    address: "321 Rue D, Casablanca"
+                    latitude: 33.5950
+                    longitude: -7.5700
+                  - id: 3
+                    customerName: "Client C"
+                    address: "789 Rue C, Casablanca"
+                    latitude: 33.5900
+                    longitude: -7.5800
+        '404':
+          description: Tour not found
+        '400':
+          description: Tour has no deliveries to optimize
 
 components:
   schemas:
